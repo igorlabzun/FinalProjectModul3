@@ -28,7 +28,7 @@ public class GameControllerService extends HttpServlet {
             session.setAttribute("currentQuestionIndex",0);
             session.setAttribute("level",level);
             session.setAttribute("totalQuestion",questions.size());
-            getServletContext().getRequestDispatcher("/quiz.jsp").forward(request,response);
+            getServletContext().getRequestDispatcher("/pony.jsp").forward(request,response);
         } else {
             response.getWriter().println("Помилка: Не має доступних питань.");
         }
@@ -55,7 +55,7 @@ public class GameControllerService extends HttpServlet {
         int currentQuestionIndex = (Integer) session.getAttribute("currentQuestionIndex");
         if("true".equals(request.getParameter("restartButton"))){
             restartGame(session);
-            response.sendRedirect("/quiz.jsp");
+            response.sendRedirect("/pony.jsp");
             return;
         }
         session.setAttribute("currentQuestionIndex",currentQuestionIndex);
@@ -65,9 +65,9 @@ public class GameControllerService extends HttpServlet {
             GameQuestion nextQuestion = questions.get(currentQuestionIndex + 1);
             session.setAttribute("currentQuestion",nextQuestion);
             session.setAttribute("currentQuestionIndex",currentQuestionIndex + 1);
-            response.sendRedirect("/quiz.jsp");
+            response.sendRedirect("/pony.jsp");
         } else {
-            response.sendRedirect("/quizResult.jsp");
+            response.sendRedirect("/ponyResult.jsp");
         }
     }
     private void restartGame(HttpSession session){
